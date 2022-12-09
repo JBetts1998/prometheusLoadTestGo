@@ -22,6 +22,10 @@ var Metric = prometheus.NewGaugeVec(
 	[]string{"cluster", "node", "metric"},
 )
 
+func init() {
+	prometheus.MustRegister(Metric)
+}
+
 func recordMetrics(numNodes []int) {
 	go func() {
 		for {
