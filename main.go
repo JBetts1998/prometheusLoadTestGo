@@ -22,6 +22,11 @@ var Metric = prometheus.NewGaugeVec(
 	[]string{"cluster", "node", "metric"},
 )
 
+func init() {
+	// Register the Metric variable with Prometheus.
+	prometheus.MustRegister(Metric)
+}
+
 func recordMetrics(numNodes []int) {
 	go func() {
 		for {
@@ -51,7 +56,7 @@ func recordMetrics(numNodes []int) {
 func main() {
 	var numNodes []int
 	for i := 0; i < clusterNumber; i++ {
-		rand.Seed(time.Now().UnixNano())
+		//rand.Seed(time.Now().UnixNano())
 		num := rand.Intn(10)
 		numNodes = append(numNodes, num)
 	}
